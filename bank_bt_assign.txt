@@ -1,0 +1,104 @@
+// SPDX-License-Identifier: Unlicensed
+// SPDX-License-Identifier: MIT
+/*
+pragma solidity ^0.6.0;
+contract MyBank
+{
+    mapping(address=> uint ) private _balances;
+    address public owner;
+    event LogDepositeMade(address accountHoder, uint amount );
+
+    constructor () public
+     {
+         owner=msg.sender;
+         emit LogDepositeMade(msg.sender, 1000);
+     }
+
+        function deposite() public payable  returns (uint)
+        {
+
+        require ((_balances[msg.sender] + msg.value) >  _balances[msg.sender] && msg.sender!=address(0));
+        _balances[msg.sender] += msg.value;
+        emit LogDepositeMade(msg.sender , msg.value);
+        return _balances[msg.sender];
+        } 
+
+        function withdraw (uint withdrawAmount) public  returns (uint)
+        {
+
+                require (_balances[msg.sender] >= withdrawAmount);
+                require(msg.sender!=address(0));
+                require (_balances[msg.sender] > 0);
+                _balances[msg.sender]-= withdrawAmount;
+                msg.sender.transfer(withdrawAmount);
+                emit LogDepositeMade(msg.sender , withdrawAmount);
+                return _balances[msg.sender];
+
+        }
+
+        function viewBalance() public view returns (uint)
+        {
+            return _balances[msg.sender];
+        }
+   
+}
+*/
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity  ^0.6.0;
+
+
+contract Bank {
+    mapping (address=>uint) private  balances ;
+    address public  owner;
+    event Log(address sender , uint amt);
+
+    constructor() public {
+        owner= msg.sender;
+        emit Log(msg.sender , 21212121);
+    }
+
+    function deposit() public payable  returns(uint){
+
+        require(balances[msg.sender]+msg.value > balances[msg.sender]);
+        require(msg.sender != address(0));
+
+        balances[msg.sender]+= msg.value;
+        Log(msg.sender, msg.value);
+        return (balances[msg.sender]);
+
+    }
+
+
+     function withdraw(uint amt) public returns (uint){
+
+        require(balances[msg.sender]>= amt);
+        require(msg.sender!=address(0));
+
+        balances[msg.sender]-= amt;
+        msg.sender.transfer(amt);
+        Log(msg.sender, amt);
+        return (balances[msg.sender]);
+
+    }
+
+
+    function showbalance() public view  returns (uint)     {
+        return  (balances[msg.sender]);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
